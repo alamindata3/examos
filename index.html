@@ -6,25 +6,28 @@
     <title>ExamOS - The Ultimate 100X Future Exam Ecosystem</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
             --secondary: #7c3aed;
             --accent: #06b6d4;
-            --dark: #1e293b;
-            --darker: #0f172a;
+            --dark: #0f172a;
+            --darker: #020617;
             --light: #f8fafc;
             --gray: #64748b;
             --gray-light: #cbd5e1;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -39,44 +42,64 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
+            line-height: 1.7;
+            color: var(--light);
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            z-index: -1;
         }
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         section {
-            padding: 100px 0;
+            padding: 120px 0;
+            position: relative;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            letter-spacing: -0.01em;
         }
 
         h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         p {
             margin-bottom: 1.5rem;
-            color: var(--gray);
+            color: var(--gray-light);
+            font-size: 1.1rem;
         }
 
         .text-center {
@@ -88,17 +111,29 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+        }
+
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            border-radius: 3px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 28px;
+            padding: 16px 32px;
             border-radius: var(--radius);
             font-weight: 600;
             text-decoration: none;
@@ -106,33 +141,52 @@
             cursor: pointer;
             border: none;
             font-size: 1rem;
-            gap: 8px;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             box-shadow: var(--shadow);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
         }
 
         .btn-secondary {
-            background-color: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            background: transparent;
+            color: white;
+            border: 2px solid var(--glass-border);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background-color: var(--primary);
-            color: white;
+            background: var(--glass);
+            border-color: var(--primary);
+            transform: translateY(-3px);
         }
 
         .btn-large {
-            padding: 16px 32px;
+            padding: 18px 40px;
             font-size: 1.1rem;
         }
 
@@ -142,10 +196,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
             z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--glass-border);
             transition: var(--transition);
         }
 
@@ -163,38 +218,43 @@
         }
 
         .logo {
-            height: 42px;
+            height: 48px;
             width: auto;
+            filter: brightness(0) invert(1);
         }
 
         .brand-text {
             font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--darker);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-link {
             text-decoration: none;
-            color: var(--dark);
+            color: var(--gray-light);
             font-weight: 500;
             transition: var(--transition);
             position: relative;
+            padding: 8px 0;
         }
 
         .nav-link:hover {
-            color: var(--primary);
+            color: white;
         }
 
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -210,22 +270,21 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
-            gap: 4px;
+            gap: 5px;
         }
 
         .bar {
             width: 25px;
             height: 3px;
-            background-color: var(--dark);
+            background-color: white;
             border-radius: 2px;
             transition: var(--transition);
         }
 
         /* Hero Section */
         .hero {
-            padding-top: 180px;
-            padding-bottom: 100px;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding-top: 200px;
+            padding-bottom: 150px;
             position: relative;
             overflow: hidden;
         }
@@ -233,13 +292,25 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: url('https://i.postimg.cc/Q962cgTd') no-repeat center right;
-            background-size: contain;
-            opacity: 0.1;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
         }
 
         .hero-content {
@@ -254,27 +325,27 @@
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 4.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.1;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--gray);
+            font-size: 1.3rem;
+            color: var(--gray-light);
             margin-bottom: 2.5rem;
             max-width: 600px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 3rem;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
         }
 
         .hero-stats {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .stat {
@@ -283,14 +354,19 @@
         }
 
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
+            font-size: 1rem;
+            color: var(--gray-light);
+            margin-top: 0.5rem;
         }
 
         .hero-visual {
@@ -302,27 +378,30 @@
 
         .platform-preview {
             width: 100%;
-            max-width: 500px;
-            height: 400px;
-            background: white;
+            max-width: 600px;
+            height: 450px;
+            background: var(--glass);
             border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
         }
 
         .preview-image {
-            width: 100%;
+            width: 90%;
             height: auto;
-            border-radius: var(--radius);
+            border-radius: calc(var(--radius) - 4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         /* Coming Soon Banner */
         .coming-soon {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             padding: 20px 0;
             text-align: center;
@@ -343,95 +422,147 @@
         .coming-soon-content {
             position: relative;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
 
         .coming-soon h2 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0;
+            font-size: 1.3rem;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         /* Features Section */
         .features {
-            background-color: white;
+            background: rgba(15, 23, 42, 0.5);
+            position: relative;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .feature-card {
-            background: white;
+            background: var(--glass);
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 2.5rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            border: 1px solid var(--gray-light);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
         }
 
-        .feature-icon img {
-            width: 30px;
-            height: 30px;
-            filter: brightness(0) invert(1);
+        .feature-icon i {
+            font-size: 1.8rem;
+            color: white;
         }
 
         .feature-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
         }
 
         .feature-description {
-            color: var(--gray);
+            color: var(--gray-light);
         }
 
         /* Exam Types Section */
         .exam-types {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            background: rgba(15, 23, 42, 0.7);
+            position: relative;
         }
 
         .exam-types-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         .exam-type-card {
-            background: white;
+            background: var(--glass);
             border-radius: var(--radius);
-            padding: 1.5rem;
+            padding: 2rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-type-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 40px 40px 0;
+            border-color: transparent var(--primary) transparent transparent;
         }
 
         .exam-type-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
         }
 
         .exam-type-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
             color: var(--primary);
         }
 
@@ -440,10 +571,10 @@
         }
 
         .exam-type-card li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--gray-light);
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--glass-border);
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 1.8rem;
         }
 
         .exam-type-card li:last-child {
@@ -460,13 +591,14 @@
 
         /* AI Teacher Section */
         .ai-teacher {
-            background-color: white;
+            background: rgba(15, 23, 42, 0.5);
+            position: relative;
         }
 
         .ai-teacher-content {
             display: flex;
             align-items: center;
-            gap: 4rem;
+            gap: 5rem;
         }
 
         .ai-teacher-text {
@@ -475,13 +607,14 @@
 
         .ai-features-list {
             list-style: none;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
         }
 
         .ai-features-list li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
+            padding: 1rem 0;
+            padding-left: 2.5rem;
             position: relative;
+            font-size: 1.1rem;
         }
 
         .ai-features-list li::before {
@@ -490,6 +623,7 @@
             left: 0;
             color: var(--primary);
             font-weight: bold;
+            font-size: 1.3rem;
         }
 
         .ai-teacher-visual {
@@ -500,46 +634,55 @@
 
         .ai-demo {
             width: 100%;
-            max-width: 500px;
-            height: 350px;
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            max-width: 550px;
+            height: 400px;
+            background: var(--glass);
             border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: var(--shadow);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
 
         .demo-image {
-            width: 80%;
+            width: 85%;
             height: auto;
+            border-radius: calc(var(--radius) - 4px);
         }
 
         /* Pricing Section */
         .pricing {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            background: rgba(15, 23, 42, 0.7);
+            position: relative;
         }
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .pricing-card {
-            background: white;
+            background: var(--glass);
             border-radius: var(--radius);
-            padding: 2.5rem 2rem;
+            padding: 3rem 2.5rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
             display: flex;
             flex-direction: column;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
         }
 
         .pricing-card.featured {
             transform: scale(1.05);
             border: 2px solid var(--primary);
+            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
         }
 
         .pricing-badge {
@@ -553,15 +696,16 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
         }
 
         .pricing-header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .plan-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
         }
 
@@ -573,30 +717,30 @@
         }
 
         .currency {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
         }
 
         .amount {
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 3.5rem;
+            font-weight: 800;
         }
 
         .period {
-            color: var(--gray);
+            color: var(--gray-light);
         }
 
         .plan-features {
             list-style: none;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             flex-grow: 1;
         }
 
         .plan-features li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--gray-light);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--glass-border);
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
         }
 
         .plan-features li:last-child {
@@ -613,26 +757,43 @@
 
         /* CTA Section */
         .cta {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
         }
 
         .cta-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .cta-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
             opacity: 0.9;
         }
 
         .cta-buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .cta .btn-primary {
@@ -653,64 +814,75 @@
 
         /* Contact Section */
         .contact-section {
-            background-color: white;
-            padding: 100px 0;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 120px 0;
+            position: relative;
         }
 
         .contact-section h1 {
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .contact-section > p {
             text-align: center;
             max-width: 600px;
-            margin: 0 auto 3rem;
+            margin: 0 auto 4rem;
         }
 
         .contact-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            background: white;
-            padding: 2.5rem;
+            background: var(--glass);
+            padding: 3rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
         }
 
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 1rem;
+            padding: 1.2rem;
             margin-bottom: 1.5rem;
-            border: 1px solid var(--gray-light);
+            border: 1px solid var(--glass-border);
             border-radius: var(--radius);
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--gray-light);
         }
 
         .contact-form input:focus,
         .contact-form textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
         }
 
         .contact-form textarea {
-            min-height: 150px;
+            min-height: 180px;
             resize: vertical;
         }
 
         /* Footer */
         .footer {
-            background-color: var(--darker);
+            background: var(--darker);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--glass-border);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 3rem;
             margin-bottom: 3rem;
         }
@@ -723,32 +895,42 @@
         }
 
         .footer-logo {
-            height: 36px;
+            height: 40px;
             width: auto;
+            filter: brightness(0) invert(1);
         }
 
         .footer-description {
             color: var(--gray-light);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .social-links {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
         }
 
         .social-link {
-            color: var(--gray-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             text-decoration: none;
             transition: var(--transition);
+            border: 1px solid var(--glass-border);
         }
 
         .social-link:hover {
-            color: white;
+            background: var(--primary);
+            transform: translateY(-3px);
         }
 
         .footer-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
             color: white;
         }
@@ -758,7 +940,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.8rem;
         }
 
         .footer-links a {
@@ -773,16 +955,53 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 3rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--gray-light);
             font-size: 0.9rem;
         }
 
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(100px, 100px) rotate(360deg);
+            }
+        }
+
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+        }
+
         @media (max-width: 992px) {
             h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
             }
             
             h2 {
@@ -805,6 +1024,10 @@
             .pricing-card.featured {
                 transform: none;
             }
+            
+            .cta-title {
+                font-size: 2.8rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -813,13 +1036,15 @@
                 top: 80px;
                 right: -100%;
                 flex-direction: column;
-                background-color: white;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(20px);
                 width: 80%;
                 height: calc(100vh - 80px);
                 box-shadow: var(--shadow-lg);
                 padding: 2rem;
                 transition: var(--transition);
                 gap: 1.5rem;
+                border-left: 1px solid var(--glass-border);
             }
             
             .nav-menu.active {
@@ -861,28 +1086,36 @@
                 width: 100%;
                 max-width: 300px;
             }
+            
+            .contact-form {
+                padding: 2rem;
+            }
         }
 
         @media (max-width: 576px) {
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             section {
-                padding: 70px 0;
+                padding: 80px 0;
             }
             
             .hero {
-                padding-top: 140px;
+                padding-top: 160px;
             }
             
             .hero-stats {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.5rem;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -892,8 +1125,8 @@
     <div class="coming-soon">
         <div class="container">
             <div class="coming-soon-content">
-                <h2>🚀 Exciting News!</h2>
-                <p>ExamOS is currently under development. We're working hard to bring you the ultimate exam ecosystem. Stay tuned for updates!</p>
+                <i class="fas fa-rocket pulse"></i>
+                <h2>🚀 Exciting News! ExamOS is currently under development</h2>
             </div>
         </div>
     </div>
@@ -932,16 +1165,16 @@
                     <h1 class="hero-title">The Ultimate <span class="gradient-text">100X Future</span> Exam Ecosystem</h1>
                     <p class="hero-subtitle">AI-powered, adaptive, secure, and gamified exam platform designed to transform how students learn and prepare for exams.</p>
                     <div class="hero-buttons">
-                        <a href="#" class="btn btn-primary btn-large">Start Free Trial</a>
-                        <a href="#" class="btn btn-secondary btn-large">Watch Demo</a>
+                        <a href="#" class="btn btn-primary btn-large"><i class="fas fa-play-circle"></i> Start Free Trial</a>
+                        <a href="#" class="btn btn-secondary btn-large"><i class="fas fa-video"></i> Watch Demo</a>
                     </div>
                     <div class="hero-stats">
                         <div class="stat">
-                            <span class="stat-number">50,000+</span>
+                            <span class="stat-number">50K+</span>
                             <span class="stat-label">Questions</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">10,000+</span>
+                            <span class="stat-number">10K+</span>
                             <span class="stat-label">Students</span>
                         </div>
                         <div class="stat">
@@ -953,8 +1186,13 @@
                 <div class="hero-visual">
                     <div class="platform-preview">
                         <div style="text-align: center; padding: 2rem;">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">ExamOS Platform Preview</h3>
-                            <p style="color: var(--gray);">Interactive dashboard with real-time analytics and personalized learning paths</p>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.8rem;">ExamOS Platform Preview</h3>
+                            <p style="color: var(--gray-light); font-size: 1.1rem;">Interactive dashboard with real-time analytics and personalized learning paths</p>
+                            <div style="margin-top: 2rem; display: flex; justify-content: center;">
+                                <div style="width: 80%; height: 180px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-chart-line" style="font-size: 3rem; color: white;"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -972,45 +1210,28 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
-                            <path d="M8.5 8.5v.01"></path>
-                            <path d="M16 15.5v.01"></path>
-                            <path d="M12 12v.01"></path>
-                            <path d="M11 17v.01"></path>
-                            <path d="M7 14v.01"></path>
-                        </svg>
+                        <i class="fas fa-robot"></i>
                     </div>
                     <h3 class="feature-title">AI Teacher</h3>
                     <p class="feature-description">Personalized tutor with adaptive lesson generation and instant doubt-solving for any question or concept.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                        </svg>
+                        <i class="fas fa-gamepad"></i>
                     </div>
                     <h3 class="feature-title">Gamification & Competition</h3>
                     <p class="feature-description">Leaderboards, XP systems, badges, and national competitions to make learning engaging and fun.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
+                        <i class="fas fa-users"></i>
                     </div>
                     <h3 class="feature-title">Student Collaboration</h3>
                     <p class="feature-description">Invite friends to exams, create private groups, and participate in team competitions.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                        </svg>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="feature-title">Advanced Security</h3>
                     <p class="feature-description">Anti-cheating AI, blockchain audit trails, and enterprise-grade data protection.</p>
@@ -1094,13 +1315,18 @@
                         <li>Exam preparation guidance with practice tests</li>
                         <li>AI-assisted coaching for all exam types</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">Experience AI Teacher</a>
+                    <a href="#" class="btn btn-primary"><i class="fas fa-brain"></i> Experience AI Teacher</a>
                 </div>
                 <div class="ai-teacher-visual">
                     <div class="ai-demo">
                         <div style="text-align: center; padding: 2rem;">
-                            <h3 style="color: var(--primary); margin-bottom: 1rem;">AI Teacher Interface</h3>
-                            <p style="color: var(--gray);">Interactive AI assistant providing personalized learning guidance</p>
+                            <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.8rem;">AI Teacher Interface</h3>
+                            <p style="color: var(--gray-light); font-size: 1.1rem; margin-bottom: 2rem;">Interactive AI assistant providing personalized learning guidance</p>
+                            <div style="display: flex; justify-content: center; gap: 20px;">
+                                <div style="width: 120px; height: 120px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-robot" style="font-size: 3rem; color: white;"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1131,7 +1357,7 @@
                         <li>Community leaderboards</li>
                         <li>Basic progress tracking</li>
                     </ul>
-                    <a href="#" class="btn btn-outline">Get Started</a>
+                    <a href="#" class="btn btn-secondary">Get Started</a>
                 </div>
                 <div class="pricing-card featured">
                     <div class="pricing-badge">Most Popular</div>
@@ -1170,7 +1396,7 @@
                         <li>Plagiarism detection</li>
                         <li>Multi-format publishing</li>
                     </ul>
-                    <a href="#" class="btn btn-outline">Contact Sales</a>
+                    <a href="#" class="btn btn-secondary">Contact Sales</a>
                 </div>
             </div>
         </div>
@@ -1183,8 +1409,8 @@
                 <h2 class="cta-title">Ready to Transform Education?</h2>
                 <p class="cta-subtitle">Join thousands of students and teachers already using ExamOS</p>
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary btn-large">Start Free Trial</a>
-                    <a href="#" class="btn btn-secondary btn-large">Schedule a Demo</a>
+                    <a href="#" class="btn btn-primary btn-large"><i class="fas fa-rocket"></i> Start Free Trial</a>
+                    <a href="#" class="btn btn-secondary btn-large"><i class="fas fa-calendar-alt"></i> Schedule a Demo</a>
                 </div>
             </div>
         </div>
@@ -1199,10 +1425,10 @@
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-paper-plane"></i> Send Message</button>
             </form>
-            <div style="text-align: center; margin-top: 2rem;">
-                <p>Or contact us directly on Telegram: <a href="https://t.me/+poLB_WvvpvoxYmZl" style="color: var(--primary); text-decoration: none; font-weight: 500;">@ExamOS_Support</a></p>
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="font-size: 1.1rem;">Or contact us directly on Telegram: <a href="https://t.me/+poLB_WvvpvoxYmZl" style="color: var(--primary); text-decoration: none; font-weight: 600;">@ExamOS_Support</a></p>
             </div>
         </div>
     </section>
@@ -1218,10 +1444,10 @@
                     </div>
                     <p class="footer-description">The Ultimate 100X Future Exam Ecosystem</p>
                     <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">Twitter</a>
-                        <a href="#" class="social-link">LinkedIn</a>
-                        <a href="#" class="social-link">GitHub</a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -1256,7 +1482,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 ExamOS. All rights reserved.</p>
+                <p>&copy; 2023 ExamOS. All rights reserved. | Crafted with excellence</p>
             </div>
         </div>
     </footer>
@@ -1281,9 +1507,11 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
             } else {
-                header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+                header.style.background = 'rgba(15, 23, 42, 0.8)';
             }
         });
 
@@ -1298,12 +1526,39 @@
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 }
             });
         });
+
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.createElement('div');
+            container.className = 'floating-elements';
+            document.body.appendChild(container);
+
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                
+                const size = Math.random() * 60 + 20;
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                const animationDuration = Math.random() * 30 + 20;
+                
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.left = `${left}%`;
+                element.style.top = `${top}%`;
+                element.style.animationDuration = `${animationDuration}s`;
+                
+                container.appendChild(element);
+            }
+        }
+
+        createFloatingElements();
     </script>
 </body>
 </html>
